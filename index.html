@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/font_1369125_2xawxep6qqv.css">
+        <script src="js/jquery-3.5.0.min.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/username.js"></script>
+        <script src="layer/layer.js"></script>
+        <title>BFC</title>
+    </head>
+    <body>
+        <div id="cover_layer" class="cover_layer">
+            <div class="cover-bg" id="cover-bg"></div>
+            <div class="card" id="search_result"></div>
+        </div>
+
+        <div id="project-info" class="cover_layer">
+            <div class="cover-bg" id="project-info-bg"></div>
+            <div class="card" id="project-info-content">
+                <div class="card-content">
+                    This is the project for course MSBD6000D Introduce to Block Chain Technology
+                </div>
+            </div>
+        </div>
+
+        <div class="w100 m-dorp bg-fff fixed row jc-sb box-sd">
+            <div class="w8 pic100 pad-b-1 box-sd">
+                <img src="img/logo.png">
+            </div>
+            <div class="w100 m-ss fl ai-center row col-666">
+                <a href="index.html" class="on menu">
+                    <div class="text-center">
+                        <i class="fa fa-cube"></i>
+                        <p>Blockchain Info</p>
+                    </div>
+                </a>
+                <a href="top-wallets.html" class="menu">
+                    <div class="text-center">
+                        <i class="iconfont m-none">&#xe60e;</i>
+                        <p>Accounts</p>
+                    </div>
+                </a>
+                <a href="delegate-monitor.html" class="menu">
+                    <div class="text-center">
+                        <i class="fa fa-exchange"></i>
+                        <p>Transaction and Files</p>
+                    </div>
+                </a>
+                <a href="#" class="menu" id="project-info-icon">
+                    <div class="text-center">
+                        <i class="m-none fa fa-info-circle"></i>
+                        <p>Project info</p>
+                    </div>
+                </a>				
+                
+                <div class="row jc-center flex" >
+                    <input type="search" placeholder="Search txid, account or ctAddress" id="search_content" class="bor-rs2 pad-b-1 bor-f4f w50" />
+                    <button type="button" id="search_button" class="w20 col-fff fz20 mar-l-b-1 bor-rs3 pad-b-1 pad-lr-b-3 bg-318"><i class="iconfont">&#xe63d;</i></button>
+                </div>
+            </div>
+            
+            <div class="w8 m-block text-center col-318 ai-center jc-center fz60 cursor pad-b-1 box-sd">
+                <i class="iconfont">&#xe654;</i>
+            </div>
+            
+                
+        </div>
+        <div class="split ">
+
+        </div>
+        <!-- 左侧 -->		
+        <div class="w8 box-sd fixed m-none h100">
+            <div class="column text-center col-ccc fz20 mar-t300">
+                <a href="#"><i class="iconfont pad-tb20">&#xe638;</i></a>
+                <a href="#"><i class="iconfont pad-tb20">&#xe89d;</i></a>
+                <a href="#"><i class="iconfont pad-tb20">&#xe63e;</i></a>
+                <div class="drop">
+                        <i class="iconfont pad-tb20">&#xe635;</i>
+                        <div class="drop_con2 p100 a-fadein">
+                            <div class="xs">
+                                #
+                                <div class="xsj z-100 mar-t10 mar-l35"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- 内容 -->
+        <div class="w92 bg-f5f mar-t-b-8 mar-l-b-8">
+            <div class="w100 pad-b-2">
+                <div class="row wrap jc-sb">
+                    <div class="box-sd-dbe bor-t-dbe text-center pad-b-1 fz20 w18">
+                        Transactions and Blocks
+                    </div>
+                    <div class="box-sd row wrap m-mar-t10 jc-sb pad-b-1 bor-t-e8e ai-center w80">
+                        <div class="col-666 m-w50" id="height">
+                            Height: <span v-cloak>#</span>
+                        </div>
+                        <div class="bor-r h-14 m-none"></div>
+                        <div class="col-666 m-w50">
+                            Network: BFS/BFC
+                        </div>
+                        <div class="bor-r h-14 m-none"></div>
+                        <div class="col-666 m-w50" id="app">
+                            Supply: <span v-cloak>#$</span>
+                        </div>
+                        <div class="bor-r h-14 m-none"></div>
+                        <div class="col-666 m-w50" id="count" >
+                            Address: <span v-cloak>#</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 头部切换 -->
+                <div class="mar-t-b-4">
+                    <a href="javascript:void(0);" class="transactions pad-b-1 pad-lr-b-3 box-sd" style="background: #fff"><span>Transactions</span></a>
+                    <a href="javascript:void(0);" class="blocks pad-b-1  pad-lr-b-3 mar-l-b-1 box-sd"><span>Blocks</span></a>
+                </div>
+                <!-- Transactions -->
+                <div id="transactions" style="display: block;">
+                    <div class="box-sd mar-t-b-1 pad-b-2 bg-fff">
+                        <div class="row m-none jc-sb col-318 bold">
+                            <div class="Hover">ID</div>
+                            <div class="Hover w15">Timestamp</div>
+                            <div class="Hover">Sender</div>
+                            <div class="Hover">Recipient</div>
+                            <div class="Hover w8">Amount</div>
+                            <div class="Hover w8">Fee</div>
+                            <div class="Hover w8">Height</div>
+                        </div>
+                        <div v-for="data in arr" class="row jc-sb m-none zx">
+                            <div v-cloak class="Hover">
+                                <a href="#">{{data.Body.Transactions[0].ID}}</a>
+                            </div>
+                            <div v-cloak class="Hover w15">{{getLocalTime(data.Body.Transactions[0].Timestamp)}}</div>
+                            <div v-cloak class="Hover"><a href="#">{{data.Body.Transactions[0].From}}</a></div>
+                            <div v-cloak class="Hover"><a href="#">{{data.Body.Transactions[0].To}}</a></div>
+                            <div v-cloak class="Hover w8">{{data.Body.Transactions[0].Amount}}$</div>
+                            <div v-cloak class="Hover w8">{{data.Body.Transactions[0].CarryFee}}$</div>
+                            <div v-cloak class="Hover w8">{{data.Header.Height}}</div>
+                        </div>
+                        
+                        
+                        <div v-for="data in arr" class="row jc-sb m-block m-bor-b zx">
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">ID</span>
+                                <span class="m-w50 text-right"><a href="#">{{data.Body.Transactions[0].ID}}</a>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Timestamp</span>
+                                <span class="m-w50 text-right">{{getLocalTime(data.Body.Transactions[0].Timestamp)}}</span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Sender</span>
+                                <span class="m-w50 text-right"><a href="#">{{data.Body.Transactions[0].From}}</a></span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Recipient</span>
+                                <span class="m-w50 text-right"><a href="#">{{data.Body.Transactions[0].To}}</a></span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Amount</span>
+                                <span class="m-w50 text-right">{{data.Body.Transactions[0].Amount}}$</span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Fee</span>
+                                <span class="m-w50 text-right">{{data.Body.Transactions[0].CarryFee}}$</span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Height</span>
+                                <span class="m-w50 text-right">{{data.Header.Height}}</span>
+                            </div>
+                        </div>
+                        
+                                                
+                        <div class="row jc-center mar-t-b-1">
+                            <a v-if="cur > 1" href="#" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2" @click="handleCur('sub')"><span>Previous</span></a>
+                            <a v-if="cur*num < list.length" href="#" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2" @click="handleCur('add')"><span>Next</span></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blocks -->
+                <div id="blocks" style="display: none;">
+                    <div class="box-sd mar-t-b-1  pad-b-2 bg-fff">
+                        <div class="row jc-sb m-none col-318 bold">
+                            <div class="Hover">BlockHash</div>
+                            <div class="Hover w8">Height</div>
+                            <div class="Hover w15">Timestamp</div>
+                            <div class="Hover w8">TxNumber</div>
+                            <div class="Hover">Generated by</div>
+                            <div class="Hover w8">Size</div>
+                            <div class="Hover w8">Nonce</div>
+                        </div>
+                        <div v-for="data in arr" class="row m-none jc-sb zx">
+                            <div v-cloak class="Hover">
+                                <a href="#">{{data.Header.Hash}}</a>
+                            </div>
+                            <div v-cloak class="Hover w8">{{data.Header.Height}}</div>
+
+                            <div v-cloak class="Hover w15">{{getLocalTime(data.Header.Timestamp)}}</div>
+                            <div v-cloak class="Hover w8">{{data.Header.TxNumber}}</div>
+                            <div v-cloak class="Hover"><a href="#">{{data.Header.MinerAddr}}</a></div>
+                            <div v-cloak class="Hover w8">{{data.Header.Size}}</div>
+                            <div v-cloak class="Hover w8">{{data.Header.Nonce}}</div>
+                        </div>
+                        
+                        <div v-for="data in arr" class="row m-block m-bor-b jc-sb zx">
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">BlockHash</span>
+                                <span class="m-w50 text-right"><a href="#">{{data.Header.Hash}}</a></span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Height</span>
+                                <span class="m-w50 text-right">{{data.Header.Height}}</span>
+                            </div>
+
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Timestamp</span>
+                                <span class="m-w50 text-right">{{getLocalTime(data.Header.Timestamp)}}</span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">TxNumber</span>
+                                <span class="m-w50 text-right">{{data.Header.TxNumber}}</span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Generated by</span>
+                                <span class="m-w50 text-right"><a href="#">{{data.Header.MinerAddr}}</a></span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Size</span>
+                                <span class="m-w50 text-right">{{data.Header.Size}}</span>
+                            </div>
+                            <div v-cloak class="Hover row">
+                                <span class="m-w50">Nonce</span>
+                                <span class="m-w50 text-right">{{data.Header.Nonce}}</span>
+                            </div>
+                        </div>
+                                                
+                        <div class="row text-center jc-center mar-t-b-1">
+                            <a v-if="cur > 1" href="#" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2 w15" @click="handleCur('sub')"><span>Previous</span></a>
+                            <a v-if="cur*num < list.length" href="#" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2 w15" @click="handleCur('add')"><span>Next</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <script src="js/app.js"></script>
+        <script type="text/javascript">
+
+            window.onload = function() {
+                vum = new Vue({
+                    el: '#transactions',
+                    data: {
+                        list: [],
+                        arr: [],  //存放当前页数据
+                        num: 50,  //每页数据个数，可直接修改 
+                        cur: 1,   //当前页数
+                    },
+                    beforeCreate: function() {
+                        $.ajax({
+                            type: 'Get',
+                            dataType: "json",
+                            url: 'http://159.138.135.42:8008/blocks',
+                            success: function(data) {
+                                console.log(data.code);
+                                vum.$set(vum.$data, 'list', data.data);
+                                vum.$set(vum.$data, 'arr', data.data.filter(
+                                    (item) => {return item.Header.Height <= 50}
+                                ));
+                                vum.$forceUpdate();
+                            }
+                        })
+                    },
+                    methods: {
+                        getArr(i) {               
+                            this.arr = this.list.filter((item, index) => {
+                                return index >= (i - 1) * this.num && index < i * this.num
+                            })
+                        },
+                        
+                        handleCur(type) {              
+                            if (type == 'sub') {          
+                                if (this.cur == 1) {
+                                    return
+                                }  
+                                this.cur -= 1               
+                                this.getArr(this.cur)   
+                                console.log(this.list);   
+                            } else {                     
+                                if (this.cur == this.total) {
+                                    return
+                                }
+                                this.cur += 1              
+                                this.getArr(this.cur)    
+                                console.log(this.list);   
+                            }
+                        }
+                    }
+
+                });
+
+                vum2 = new Vue({
+                    el: '#blocks',
+                    data: {
+                        list: [],
+                        arr: [],  //存放当前页数据
+                        num: 50,  //每页数据个数，可直接修改 
+                        cur: 1,   //当前页数
+                    },
+                    beforeCreate: function() {
+                        $.ajax({
+                            type: 'Get',
+                            url: 'http://159.138.135.42:8008/blocks',
+                            success: function(data) {
+                                console.log(data.code);
+                                vum2.$set(vum2.$data, 'list', data.data);
+                                vum2.$set(vum2.$data, 'arr', data.data.filter(
+                                    (item) => {return item.Header.Height <= 50}
+                                ));
+                                vum2.$forceUpdate();
+                            }
+                        })
+                    },
+                    methods: {
+                        getArr(i) {               
+                            this.arr = this.list.filter((item, index) => {
+                                return index >= (i - 1) * this.num && index < i * this.num
+                            })
+                        },
+                        
+                        handleCur(type) {              
+                            if (type == 'sub') {          
+                                if (this.cur == 1) {
+                                    return
+                                }  
+                                this.cur -= 1               
+                                this.getArr(this.cur)   
+                                console.log(this.list);   
+                            } else {                     
+                                if (this.cur == this.total) {
+                                    return
+                                }
+                                this.cur += 1              
+                                this.getArr(this.cur)    
+                                console.log(this.list);   
+                            }
+                        }
+                    }
+                });
+            
+            }
+
+            $(function() {
+                $(".transactions").on("click", function() {
+                    $('.transactions').css('background', '#fff')
+                    $('#transactions').css('display', 'block')
+                    $('.blocks').css('background', '')
+                    $('#blocks').css('display', 'none')
+                });
+                $(".blocks").on("click", function() {
+                    $('.blocks').css('background', '#fff')
+                    $('#blocks').css('display', 'block')
+                    $('.transactions').css('background', '')
+                    $('#transactions').css('display', 'none')
+                });
+            }) 
+
+
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $(".Hover").on("mouseenter", function() {
+                        if (this.offsetWidth < this.scrollWidth) {
+                            var that = this;
+                            var text = $(this).text();
+                            // console.log(text);
+                            layer.tips(text, that, {
+                                tips: [1, '#3185ee'],
+                                time: 2000
+                            });
+                        }
+                    });
+                }, 1000);
+            });
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon">  
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/font_1369125_2xawxep6qqv.css">
+        <script src="js/jquery-3.5.0.min.js"></script>
+        <script src="js/vue.min.js"></script>
+        <script src="js/username.js"></script>
+        <script src="layer/layer.js"></script>
+        <script src="js/transactions.js"></script>
+
+        <title>BFC-Tansactions</title>
+
+    
+    </head>
+    <body>
+        <div id="cover_layer" class="cover_layer">
+            <div class="cover-bg" id="cover-bg"></div>
+            <div class="card" id="search_result"></div>
+        </div>
+
+        <div id="project-info" class="cover_layer">
+            <div class="cover-bg" id="project-info-bg"></div>
+            <div class="card" id="project-info-content">
+                <div class="card-content">
+                    This is the project for course MSBD6000D Introduce to Block Chain Technology
+                </div>
+            </div>
+        </div>
+
+        <div class="w100 m-dorp bg-fff fixed row jc-sb box-sd">
+            <div class="w8 pic100 pad-b-1 box-sd">
+                <img src="img/logo.png">
+            </div>
+            <div class="w100 m-ss fl ai-center row col-666">
+                <a href="index.html" class="menu">
+                    <div class="text-center">
+                        <i class="m-none fa fa-cube"></i>
+                        <p>Blockchain Info</p>
+                    </div>
+                </a>
+                <a href="top-wallets.html" class="menu">
+                    <div class="text-center">
+                        <i class="m-none iconfont">&#xe60e;</i>
+                        <p>Accounts</p>
+                    </div>
+                </a>
+                <a href="delegate-monitor.html" class="on menu">
+                    <div class="text-center">
+                        <i class="m-none fa fa-exchange "></i>
+                        <p>Transactions and Files</p>
+                    </div>
+                </a>	
+                <a href="#" id="project-info-icon" class="menu">
+                    <div class="text-center">
+                        <i class="m-none fa fa-info-circle"></i>
+                        <p>Project info</p>
+                    </div>
+                </a>				
+                
+                <div class="row jc-center flex" >
+                    <input type="search" placeholder="Search txid, account or ctAddress" id="search_content" class="bor-rs2 pad-b-1 bor-f4f w50" />
+                    <button type="button" id="search_button" class="w20 col-fff fz20 mar-l-b-1 bor-rs3 pad-b-1 pad-lr-b-3 bg-318"><i class="iconfont">&#xe63d;</i></button>
+                </div>
+                
+                
+            </div>
+            
+            <div class="w8 m-block text-center col-318 ai-center jc-center fz60 cursor pad-b-1 box-sd">
+                <i class="iconfont">&#xe654;</i>
+            </div>
+            
+                
+        </div>
+        <div class="split ">
+
+        </div>
+        <!-- 左侧 -->
+        <div class="w8 box-sd fixed m-none h100">
+            <div class="column text-center col-ccc fz20 mar-t300">
+                <a href="#"><i class="iconfont pad-tb20">&#xe638;</i></a>
+                <a href="#"><i class="iconfont pad-tb20">&#xe89d;</i></a>
+                <a href="#"><i class="iconfont pad-tb20">&#xe63e;</i></a>
+                <div class="drop">
+                        <i class="iconfont pad-tb20">&#xe635;</i>
+                        <div class="drop_con2 p100 a-fadein">
+                            <div class="xs">
+                                #
+                                <div class="xsj z-100 mar-t10 mar-l35"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- 内容 -->
+        <div class="w92 bg-f5f mar-t-b-8 mar-l-b-8">
+            <div class="w100 pad-b-2">
+                <div class="row wrap jc-sb">
+                    <div class="box-sd-dbe bor-t-dbe text-center pad-b-1 fz20 w18">
+                        Transfer and Contract
+                    </div>
+                    <div class="box-sd row wrap m-mar-t10 jc-sb pad-b-1 bor-t-e8e ai-center w80">
+                        <div class="col-666 m-w50" id="height">
+                            Height: <span v-cloak>#</span>
+                        </div>
+                        <div class="bor-r h-14 m-none"></div>
+                        <div class="col-666 m-w50">
+                            Network: BFS/BFC
+                        </div>
+                        <div class="bor-r h-14 m-none"></div>
+                        <div class="col-666 m-w50" id="app">
+                            Supply: <span v-cloak>#$</span>
+                        </div>
+                        <div class="bor-r h-14 m-none"></div>
+                        <div class="col-666 m-w50" id="count" >
+                            Address: <span v-cloak>#</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="transactions">
+                    <div class="box-sd mar-t-b-4 pad-b-2 bg-fff ">
+                        <div class="row m-wrap jc-sb ai-center">
+                            <p>We support two kinds of transactions. One is the basic transaction and another is transaction with smart contract. For the basic one, you need to provide payer's and receiver's address with your public + private key for a transaction. And if you want to make transaction with <b>smart contract</b>, we provide API for you to upload your contract and data. You can deploy it first and then apply it on the transaction.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- 头部切换 -->
+                <div class="mar-t-b-4">
+                    <a href="javascript:void(0);" class="Active col-666 pad-b-1 pad-lr-b-3 box-sd" style="background: #fff"><span>Transfer</span></a>
+                    <a href="javascript:void(0);" class="Standby col-666 pad-b-1  pad-lr-b-3 mar-l-b-1 box-sd"><span>Contract</span></a>
+                    <a href="javascript:void(0);" class="Files col-666 pad-b-1  pad-lr-b-3 mar-l-b-1 box-sd"><span>Files</span></a>
+                </div>
+                <!-- 内容部分 -->
+                <div id="Active" style="display: block">
+                    <div class="box-sd mar-t-b-1 pad-b-2 bg-fff">						
+                        <div class="form-style-6">
+                            <h1>Basic Transaction</h1>
+                            <form id="basic_form" onsubmit="return false" action="#">
+                                From Address
+                                <input type="text" name="from_add" placeholder="From Account Address" />
+                                Received Address
+                                <input type="text" name="received_add" placeholder="Receiver's Account Address" />
+                                Amount ($)
+                                <input type="number" name="amount" placeholder="The fee you want to transfer to receiver" />
+                                Auxdata
+                                <input type="text" name="auxdata" placeholder="You can add some custome data, which will be store in blockchain" />
+                                Public Key
+                                <textarea style="resize:none" name="publick" placeholder="Input your public key"></textarea>
+                                Private Key
+                                <textarea style="resize:none" name="privatek" placeholder="Input your private Key"></textarea>
+                                Carry Fee ($)
+                                <input type="number" name="fee" placeholder="Reward for miner who blocks the tx" />
+                                <input type="submit" value="Send" onclick="send_basic_form()" />
+                                
+                            </form>
+                            <div id="receipt_basic_transaction" style="word-wrap:break-word"></div>
+                        </div>	
+                        
+                        			
+                    </div>
+                </div>
+                <div id="Standby" style="display: none;">
+
+                    <div class="box-sd mar-t-b-1 pad-b-2 bg-fff">						
+                       
+                        <div class="form-style-6">
+                            <h1>Step 1: Deploy Contract</h1>
+                            <form id="deploy_contract" onsubmit="return false" action="#">
+                                
+                                From Address
+                                <input type="text" name="dfrom" placeholder="Your Address" />
+                                Public Key
+                                <textarea style="resize:none" name="dpublick" placeholder="Input your public key"></textarea>
+                                Private Key
+                                <textarea style="resize:none" name="dprivatek" placeholder="Input your private Key"></textarea>
+                                Amount ($)
+                                <input type="number" name="damount" placeholder="The amout of fee you want to transfer to the contract account" />
+                                Carry fee ($)
+                                <input type="number" name="dcarryFee" placeholder="The fee that rewards for miner who block the tx" />
+                                Contract Afid
+                                <input type="text" name="dcontractAfid" placeholder="The afid of contract.py" />
+                                Var Afid
+                                <input type="text" name="dvarAfid" placeholder="The afid of var.json" /> 
+                                <input type="submit" value="Send" onclick="deploy_contract()"/>
+                            </form>
+                            <div id="receipt_deploy_contract" style="word-wrap:break-word"></div>
+                        </div>
+
+                        <div class="form-style-6">
+                            <h1>Step 2: Apply Contract</h1>
+                            <form id="apply_contract" onsubmit="return false" action="#">
+                                
+                                From Address
+                                <input type="text" name="afrom" placeholder="Your Address" />
+                                Contract Address
+                                <input type="text" name="ato" placeholder="contract address (ctAddress in deploying contract)" />
+                                Public Key
+                                <textarea style="resize:none" name="apublick" placeholder="Input your public key"></textarea>
+                                Private Key
+                                <textarea style="resize:none" name="aprivatek" placeholder="Input your private Key"></textarea>
+                                Amount ($)
+                                <input type="number" name="aamount" placeholder="The amout of fee you want to transfer to the contract account" />
+                                Carry fee ($)
+                                <input type="number" name="acarryFee" placeholder="The fee that rewards for miner who block the tx" />
+                                Function Name
+                                <input type="text" name="afunctionName"  placeholder="The function in contract.py which will be excuted" />
+                                Input Data Afid
+                                <input type="text" name="ainputDataAfid" placeholder="The afid of input.json" />
+                                
+                                <input type="submit" value="Send" onclick="apply_contract()"/>
+                            </form>
+                            <div id="receipt_apply_contract" style="word-wrap:break-word"></div>
+                        </div>
+                    </div>		
+                </div>
+
+                <div id="Files" style="display: none;">
+
+                    <div class="box-sd mar-t-b-1 pad-b-2 bg-fff">						
+                        <div class="form-style-6">
+                            <h1>Upload Files</h1>
+                            <form id="upload_files" onsubmit="return false" action="#">
+                                Storage
+                                <input type="number" name="storage" id="storage" placeholder="Please choose from {3,4,5,6,7}" />
+                                Days
+                                <input type="number" name="days" id="days" placeholder="Days" />
+                                Field
+                                <input type="text" name="field" id="field" placeholder="Please input |afs|, |arfs| or |afs|arfs|" />
+                                
+                                <div class="box">
+                                    <input type="file" name="files[]" id="files" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+                                    <label for="files"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose files to upload&hellip;</span></label>
+
+                                </div>
+                                <input type="submit"  value="Upload" onclick="upload_files()"/>
+                            </form>
+                            <div id="receipt_upload_files" style="word-wrap:break-word"></div>
+                        </div>
+
+                        <div class="form-style-6">
+                            <h1>Download File</h1>
+                            <form id="download_file" onsubmit="return false" action="#">
+                                File Afid
+                                <input type="text" id="fileID" placeholder="Please input the afid of file you want to download" />
+                                File Name
+                                <input type="text" id="fileName"  placeholder="File name" />
+                             
+                                <input type="submit"  value="Download" onclick="download_file()"/>
+                            </form>
+                            <div id="receipt_download_file" style="word-wrap:break-word"></div>
+                        </div>
+
+                    </div>	
+                </div>
+            </div>
+        </div>
+                
+        <script src="js/app.js"></script> 
+        <script type="text/javascript">
+            $(function() {
+                $(".Active").on("click", function() {
+                    $('.Active').css('background', '#fff')
+                    $('#Active').css('display', 'block')
+                    $('#Standby').css('display', 'none')
+                    $('.Standby').css('background', '')
+                    $('#Files').css('display', 'none')
+                    $('.Files').css('background', '')
+                });
+                $(".Standby").on("click", function() {
+                    $('.Standby').css('background', '#fff')
+                    $('.Active').css('background', '')
+                    $('.Files').css('background', '')
+                    $('#Standby').css('display', 'block')
+                    $('#Active').css('display', 'none')
+                    $('#Files').css('display', 'none')
+                });
+                $(".Files").on("click", function() {
+                    $('.Files').css('background', '#fff')
+                    $('.Standby').css('background', '')
+                    $('.Active').css('background', '')
+                    $('#Files').css('display', 'block')
+                    $('#Standby').css('display', 'none')
+                    $('#Active').css('display', 'none')
+                });
+            }) 
+        </script>
+        <script src="js/custom-file-input.js"></script>
+
+
+    </body>
+
+</html>
