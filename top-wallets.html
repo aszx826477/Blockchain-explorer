@@ -186,8 +186,8 @@
 					</div>
 
 					<div class="row text-center jc-center mar-t-b-1">
-						<a href="javascript:qpage(this);" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2 w15"><span>Previous</span></a>
-						<a v-if="datas.length >= 25" href="javascript:hpage(this);" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2 w15"><span>Next</span></a>
+						<a href="javascript:void(0);" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2 w15"><span>Previous</span></a>
+						<a href="javascript:void(0);" class="bg-dae bor-rs3 pad-b-05 pad-lr-b-4 mar-b-2 w15"><span>Next</span></a>
 					</div>
 
 				</div>
@@ -196,40 +196,18 @@
 
 		<script src="js/app.js"></script>
 		<script type="text/javascript">
-			//rmqb(0)
-
-
-			//翻页
-			urlpage = 1
-			funcname = 'rmqb'
-
-			function qpage() {
-				if (urlpage <= 1) {
-					return false
-				}
-				var page = urlpage - 1
-				eval(funcname + "(" + page + ")")
-				urlpage = urlpage - 1
-			}
-
-			function hpage() {
-				var page = urlpage + 1
-				eval(funcname + "(" + page + ")")
-				urlpage = urlpage + 1
-			}
-
-
+			
 			function getAccountStatus(url_index, vum2, list) {
 				$.ajax({
 					type: 'Get',
 					url: 'http://159.138.135.42:8008/status/' + urls[url_index],
 					success: function(data) {
 						console.log(data);
-						//vum2.$set(vum2.$data, 'datas', data)
-						//vum2.$forceUpdate();
+						
 						data.data["num"] = url_index;
 						data.data["address"] = urls[url_index];
 						list.push(data.data);
+
 						if (url_index + 1 == urls.length) {
 							console.log(list);
 							
