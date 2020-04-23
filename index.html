@@ -280,7 +280,7 @@
                             dataType: "json",
                             url: 'http://159.138.135.42:8008/blocks',
                             success: function(data) {
-                                console.log(data.code);
+                                console.log("#transactions ajax return");
                                 vum.$set(vum.$data, 'list', data.data);
                                 vum.$set(vum.$data, 'arr', data.data.filter(
                                     (item) => {return item.Header.Height <= 50}
@@ -292,25 +292,23 @@
                     methods: {
                         getArr(i) {               
                             this.arr = this.list.filter((item, index) => {
-                                return index >= (i - 1) * this.num && index < i * this.num
+                                return index >= (i - 1) * this.num && index < i * this.num;
                             })
                         },
                         
                         handleCur(type) {              
                             if (type == 'sub') {          
                                 if (this.cur == 1) {
-                                    return
+                                    return;
                                 }  
-                                this.cur -= 1               
-                                this.getArr(this.cur)   
-                                console.log(this.list);   
+                                this.cur -= 1;
+                                this.getArr(this.cur);
                             } else {                     
                                 if (this.cur == this.total) {
-                                    return
+                                    return;
                                 }
-                                this.cur += 1              
-                                this.getArr(this.cur)    
-                                console.log(this.list);   
+                                this.cur += 1;
+                                this.getArr(this.cur);
                             }
                         }
                     }
@@ -330,7 +328,7 @@
                             type: 'Get',
                             url: 'http://159.138.135.42:8008/blocks',
                             success: function(data) {
-                                console.log(data.code);
+                                console.log("#blocks ajax return");
                                 vum2.$set(vum2.$data, 'list', data.data);
                                 vum2.$set(vum2.$data, 'arr', data.data.filter(
                                     (item) => {return item.Header.Height <= 50}
@@ -342,25 +340,23 @@
                     methods: {
                         getArr(i) {               
                             this.arr = this.list.filter((item, index) => {
-                                return index >= (i - 1) * this.num && index < i * this.num
+                                return index >= (i - 1) * this.num && index < i * this.num;
                             })
                         },
                         
                         handleCur(type) {              
                             if (type == 'sub') {          
                                 if (this.cur == 1) {
-                                    return
+                                    return;
                                 }  
-                                this.cur -= 1               
-                                this.getArr(this.cur)   
-                                console.log(this.list);   
+                                this.cur -= 1;     
+                                this.getArr(this.cur);
                             } else {                     
                                 if (this.cur == this.total) {
-                                    return
+                                    return;
                                 }
-                                this.cur += 1              
-                                this.getArr(this.cur)    
-                                console.log(this.list);   
+                                this.cur += 1;              
+                                this.getArr(this.cur);    
                             }
                         }
                     }

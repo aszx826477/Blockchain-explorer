@@ -1,6 +1,6 @@
 const server_url = "http://139.9.228.218:4103/"
 
-
+/*
 count = new Vue({
     el: '#count',
     data: {
@@ -78,7 +78,7 @@ supply=setInterval(function(){
     })
 
 },5000);
-
+*/
 
 //时间戳换
 // function getLocalTime(nS) {     
@@ -132,16 +132,17 @@ $('#search_button').click(function() {
         $('#search_content').attr('placeholder','Please input txid, account or ctAddress');
         return false;
     }
+    var count = 0;
     
     
-    // query account status
-    ajax_query = $.ajax({
+    var ajax1 = $.ajax({
+        // query account status
         type: "GET",
         dataType: "json",
         url: "http://159.138.135.42:8008/status/" + input,
         success: function(res) {
-            console.log(res)
-            
+            console.log(res);
+            count ++;
             if (res.code == 0) {
                 // when the search is successful
                 $('#search_result').html('<img src="img/correct.png" style="margin: 5px auto;"></img><div class="card-content">Account Status Info<br/>'+formatJson(res)+'</div>');
@@ -150,13 +151,14 @@ $('#search_button').click(function() {
             }
         }
     });
-    // query transaction execution status
-    ajax_query2 = $.when(ajax_query).done($.ajax({
+    var ajax2 = $.ajax({ 
+        // query transaction execution status
         type: "GET",
         dataType: "json",
         url: "http://159.138.135.42:8008/receipt/" + input,
         success: function(res) {
-            console.log(res)
+            console.log(res);
+            count ++;
             if (res.code == 0) {
                 // when the search is successful
                 $('#search_result').html('<img src="img/correct.png" style="margin: 5px auto;"></img><div class="card-content">Transaction Info<br/>'+formatJson(res)+'</div>');
@@ -165,16 +167,15 @@ $('#search_button').click(function() {
             }
 
         }
-    }));
-
-    // query contract data
-    ajax_query3 = $.when(ajax_query2).done($.ajax({
+    });
+    var ajax3 = $.ajax({
+        // query contract data
         type: "GET",
         dataType: "json",
         url: "http://159.138.135.42:8008/contractLocal/" + input,
         success: function(res) {
-            console.log(res)
-
+            console.log(res);
+            count ++;
             if (res.code == 0) {
                 // when the search is successful
                 $('#search_result').html('<img src="img/correct.png" style="margin: 5px auto;"></img><div class="card-content">Contract Data Info<br/>'+formatJson(res)+'</div>');
@@ -183,14 +184,14 @@ $('#search_button').click(function() {
             }
 
         }
-    }));
+    });
 
-    $.when(ajax_query3).done(function() {
+    $.when(ajax1, ajax2, ajax3).done(function() {
         if (flag_1 && flag_2 && flag_3) {
             $('#search_result').html('<img src="img/wrong.png" style="margin: 5px auto;"></img><div class="card-content">Cannot search anything</div>');
         }
         $('#cover_layer').show();
-    });
+    })
 
 })
 
@@ -244,7 +245,7 @@ function getParam(paramName) {
     } 
     return paramValue == "" && (paramValue = null), paramValue 
 } 
-
+/*
 function copyText() {
         var Url2 = document.getElementById("keydiv").innerText;
         var oInput = document.createElement('input');
@@ -268,5 +269,5 @@ function copyText2() {
         oInput.style.display = 'none';
         layer.msg('复制成功');
 }
-
+*/
 
