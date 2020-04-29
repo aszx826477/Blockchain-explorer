@@ -18,37 +18,38 @@ count = new Vue({
     }
 });
 
-
+*/
 vum1 = new Vue({
     el: '#height',
     data: {
         height: "",
     },
     beforeCreate: function() {
-        //height=setInterval(function(){
         $.ajax({
             type: 'Get',
-            url: server_url+"api/v2/blockchain",
+            dataType: "json",
+            url: "http://159.138.135.42:8008/blockHeight",
             success: function(data) {
-                // console.log(data)
-                vum1.height = data.data.block.height;
+                console.log(data);
+                vum1.height = data.data.blockHeight;
             }
         })
-        //},5000);
+
     }
 });
-height=setInterval(function(){
+
+height = setInterval(function(){
     $.ajax({
         type: 'Get',
-        url: server_url+"api/v2/blockchain",
+        dataType: "json",
+        url: "http://159.138.135.42:8008/blockHeight",
         success: function(data) {
-            // console.log(data)
-            vum1.height = data.data.block.height;
-            // console.log(vum1.height)
+            vum1.height = data.data.blockHeight;
         }
     })
-
 },5000);
+
+/*
 vum = new Vue({
     el: '#app',
     data: {

@@ -23,7 +23,8 @@
             <div class="cover-bg" id="project-info-bg"></div>
             <div class="card" id="project-info-content">
                 <div class="card-content">
-                    This is the project for course MSBD6000D Introduce to Block Chain Technology
+                    <p>This is the project for course MSBD6000D Introduce to Block Chain Technology</p>
+                    <p>Author: YellowBee</p>
                 </div>
             </div>
         </div>
@@ -41,7 +42,7 @@
                 </a>
                 <a href="top-wallets.html" class="menu">
                     <div class="text-center">
-                        <i class="iconfont m-none">&#xe60e;</i>
+                        <i class="iconfont">&#xe60e;</i>
                         <p>Accounts</p>
                     </div>
                 </a>
@@ -53,7 +54,7 @@
                 </a>
                 <a href="#" class="menu" id="project-info-icon">
                     <div class="text-center">
-                        <i class="m-none fa fa-info-circle"></i>
+                        <i class="fa fa-info-circle"></i>
                         <p>Project info</p>
                     </div>
                 </a>				
@@ -105,7 +106,7 @@
                     </div>
                     <div class="box-sd row wrap m-mar-t10 jc-sb pad-b-1 bor-t-e8e ai-center w80">
                         <div class="col-666 m-w50" id="height">
-                            Height: <span v-cloak>#</span>
+                            Height: <span v-cloak>{{height}}</span>
                         </div>
                         <div class="bor-r h-14 m-none"></div>
                         <div class="col-666 m-w50">
@@ -140,11 +141,11 @@
                         </div>
                         <div v-for="data in arr" class="row jc-sb m-none zx">
                             <div v-cloak class="Hover">
-                                <a href="#">{{data.Body.Transactions[0].ID}}</a>
+                                <a :href="'txinfo.html?ID='+data.Body.Transactions[0].ID+'&Timestamp='+data.Body.Transactions[0].Timestamp+'&From='+data.Body.Transactions[0].From+'&To='+data.Body.Transactions[0].To+'&AccountNonce='+data.Body.Transactions[0].AccountNonce+'&Amount='+data.Body.Transactions[0].Amount+'&CarryFee='+data.Body.Transactions[0].CarryFee+'&Payload='+data.Body.Transactions[0].Payload+'&Signature='+data.Body.Transactions[0].Signature">{{data.Body.Transactions[0].ID}}</a>
                             </div>
                             <div v-cloak class="Hover w15">{{getLocalTime(data.Body.Transactions[0].Timestamp)}}</div>
-                            <div v-cloak class="Hover"><a href="#">{{data.Body.Transactions[0].From}}</a></div>
-                            <div v-cloak class="Hover"><a href="#">{{data.Body.Transactions[0].To}}</a></div>
+                            <div v-cloak class="Hover">{{window.atob(data.Body.Transactions[0].From)}}</div>
+                            <div v-cloak class="Hover">{{window.atob(data.Body.Transactions[0].To)}}</div>
                             <div v-cloak class="Hover w8">{{data.Body.Transactions[0].Amount}}$</div>
                             <div v-cloak class="Hover w8">{{data.Body.Transactions[0].CarryFee}}$</div>
                             <div v-cloak class="Hover w8">{{data.Header.Height}}</div>
@@ -154,7 +155,7 @@
                         <div v-for="data in arr" class="row jc-sb m-block m-bor-b zx">
                             <div v-cloak class="Hover row">
                                 <span class="m-w50">ID</span>
-                                <span class="m-w50 text-right"><a href="#">{{data.Body.Transactions[0].ID}}</a>
+                                <span class="m-w50 text-right"><a :href="'txinfo.html?ID='+data.Body.Transactions[0].ID+'&Timestamp='+data.Body.Transactions[0].Timestamp+'&From='+data.Body.Transactions[0].From+'&To='+data.Body.Transactions[0].To+'&AccountNonce='+data.Body.Transactions[0].AccountNonce+'&Amount='+data.Body.Transactions[0].Amount+'&CarryFee='+data.Body.Transactions[0].CarryFee+'&Payload='+data.Body.Transactions[0].Payload+'&Signature='+data.Body.Transactions[0].Signature">{{data.Body.Transactions[0].ID}}</a></span>
                             </div>
                             <div v-cloak class="Hover row">
                                 <span class="m-w50">Timestamp</span>
@@ -162,11 +163,11 @@
                             </div>
                             <div v-cloak class="Hover row">
                                 <span class="m-w50">Sender</span>
-                                <span class="m-w50 text-right"><a href="#">{{data.Body.Transactions[0].From}}</a></span>
+                                <span class="m-w50 text-right">{{data.Body.Transactions[0].From}}</span>
                             </div>
                             <div v-cloak class="Hover row">
                                 <span class="m-w50">Recipient</span>
-                                <span class="m-w50 text-right"><a href="#">{{data.Body.Transactions[0].To}}</a></span>
+                                <span class="m-w50 text-right">{{data.Body.Transactions[0].To}}</span>
                             </div>
                             <div v-cloak class="Hover row">
                                 <span class="m-w50">Amount</span>
@@ -203,13 +204,13 @@
                         </div>
                         <div v-for="data in arr" class="row m-none jc-sb zx">
                             <div v-cloak class="Hover">
-                                <a href="#">{{data.Header.Hash}}</a>
+                                <a :href="'blockinfo.html?Hash='+data.Header.Hash+'&Version='+data.Header.Version+'&Height='+data.Header.Height+'&ParentBlockHash='+data.Header.ParentBlockHash+'&MinerAddr='+data.Header.MinerAddr+'&Size='+data.Header.Size+'&Timestamp='+data.Header.Timestamp+'&Nonce='+data.Header.Nonce+'&TxNumber='+data.Header.TxNumber+'&Afid='+data.Header.Afid+'&Extra='+data.Header.Extra+'&StateRoot='+data.Header.StateRoot+'&TxRoot='+data.Header.TxRoot+'&ReceiptRoot='+data.Header.ReceiptRoot">{{data.Header.Hash}}</a>
                             </div>
                             <div v-cloak class="Hover w8">{{data.Header.Height}}</div>
 
                             <div v-cloak class="Hover w15">{{getLocalTime(data.Header.Timestamp)}}</div>
                             <div v-cloak class="Hover w8">{{data.Header.TxNumber}}</div>
-                            <div v-cloak class="Hover"><a href="#">{{data.Header.MinerAddr}}</a></div>
+                            <div v-cloak class="Hover">{{data.Header.MinerAddr}}</div>
                             <div v-cloak class="Hover w8">{{data.Header.Size}}</div>
                             <div v-cloak class="Hover w8">{{data.Header.Nonce}}</div>
                         </div>
@@ -234,7 +235,7 @@
                             </div>
                             <div v-cloak class="Hover row">
                                 <span class="m-w50">Generated by</span>
-                                <span class="m-w50 text-right"><a href="#">{{data.Header.MinerAddr}}</a></span>
+                                <span class="m-w50 text-right">{{data.Header.MinerAddr}}</span>
                             </div>
                             <div v-cloak class="Hover row">
                                 <span class="m-w50">Size</span>
